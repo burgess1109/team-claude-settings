@@ -21,6 +21,7 @@ team-claude-settings/
         │   └── infra-facts.md         ← 線上環境的架構事實
         └── skills/                    ← 叫用才載入
             ├── mr-create/SKILL.md     ← 只有人能叫（disable-model-invocation）
+            ├── pr-create/SKILL.md     ← 同上，GitHub 版
             └── create-tag/SKILL.md    ← 開放 AI 叫用，靠內部閘門防守
 ```
 
@@ -30,9 +31,9 @@ team-claude-settings/
 
 沒有 `commands/` 這一層是刻意的——custom command 已併入 skill，兩者行為相同，新的一律寫成 skill。
 
-兩個 skill 範例刻意採取相反的叫用策略，對照著看：
+`mr-create` / `pr-create` 與 `create-tag` 刻意採取相反的叫用策略，對照著看：
 
-| | `mr-create` | `create-tag` |
+| | `mr-create`／`pr-create` | `create-tag` |
 |---|---|---|
 | `disable-model-invocation` | `true` | 不設（預設） |
 | `Triggers:` 關鍵字 | 不寫（Claude 讀不到） | 寫 |
@@ -49,7 +50,8 @@ team-claude-settings/
 
 | 指令 | 做什麼 | 怎麼觸發 |
 |---|---|---|
-| `/mr-create` | 建立 Merge Request：確認分支、查工作單、預覽草稿、建立 MR，可選擇發審核通知到團隊頻道 | **只能打指令** |
+| `/mr-create` | 建立 GitLab Merge Request：確認分支、查工作單、預覽草稿、建立 MR，可選擇發審核通知到團隊頻道 | **只能打指令** |
+| `/pr-create` | 建立 GitHub Pull Request：流程同上，走 `gh` CLI | **只能打指令** |
 | `/create-tag` | 建立並推送 git tag：算下一個版號、列出將被包含的 commit、確認後才建立 | 打指令，或直接說「打個 tag」「建版」 |
 
 「只能打指令」的那些設了 `disable-model-invocation`，用講的叫不動——這是為了不佔 context 的取捨，代價就是**你得先知道它存在**。所以這張表要維護。
@@ -80,7 +82,7 @@ claude
 /onboard
 ```
 
-它會逐區塊引導你填寫或**刪除**範本內容——語言、commit 慣例、對照表、環境、架構事實、測試慣例，以及兩個範例 skill 的去留，最後驗收沒有殘留的 `<...>` 佔位符。
+它會逐區塊引導你填寫或**刪除**範本內容——語言、commit 慣例、對照表、環境、架構事實、測試慣例，以及範例 skill 的去留，最後驗收沒有殘留的 `<...>` 佔位符。
 
 > **刪除比填寫重要。** `settings/CLAUDE.md` 每次 session 都會載入，留著用不到的內容是全團隊每天在付的錢。`/onboard` 會主動建議你刪。
 

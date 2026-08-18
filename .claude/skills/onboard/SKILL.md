@@ -79,7 +79,8 @@ session 都會載入，`rules/` 碰到對應檔案就載入。留著沒用的東
 
 `settings/.claude/skills/` 底下每一個都逐一問：**保留改寫 / 直接刪除**。
 
-- `mr-create` — 需要調整 git host、工作管理平台、通知平台
+- `mr-create`（GitLab／`glab`）與 `pr-create`（GitHub／`gh`）— 需要調整 git host、工作管理平台、通知平台。
+  **團隊只用其中一個平台就把另一份刪掉**，不要兩份都留
 - `create-tag` — 需要確認版號規則（範本假設 semver patch +1）
 
 沒有對應流程就刪掉。**留著一個從沒被叫用的 skill，它的 description 仍然佔著 context**。
@@ -90,7 +91,7 @@ session 都會載入，`rules/` 碰到對應檔案就載入。留著沒用的東
 
 ### 通知區塊要「重寫」，不是「替換」
 
-`mr-create` 步驟 9 有一塊標了 `⚠️ 由 /onboard 依團隊實際平台改寫`。
+`mr-create` 與 `pr-create` 步驟 9 各有一塊標了 `⚠️ 由 /onboard 依團隊實際平台改寫`。
 那裡**不能只把尖括號換掉**——各平台的訊息語法根本不同，要整段重寫。
 
 依步驟 1 問到的通訊平台，把該平台的實際規則寫死進去：
